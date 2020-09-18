@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 typedef struct Task
 {
@@ -88,6 +89,7 @@ void Update(task_t* head, char* name,  int id)
     {
         if(pointer->nextTask == NULL)
         {
+            Interractive(7);
             return;
         }
         pointer = pointer->nextTask;
@@ -106,8 +108,13 @@ task_t* Delete(task_t* firstTask, int id)
     }
     else
     {
-        while(pointer->nextTask->id != id)
+        while(pointer->id != id)
         {
+            if(pointer->nextTask == NULL)
+            {
+                Interractive(7);
+                return firstTask;
+            }
             pointer = pointer->nextTask;
         }
         task_t* deleteTask = pointer->nextTask;
@@ -160,7 +167,7 @@ void Interractive(int id)
             printf("\nInsert method [Create/Read/Upate/Delete]\n");
             break;
         case 1:
-            printf("!!!No such method exists!!!");
+            printf("!!!No such method exists!!!\n");
             break;
         case 2:
             printf("<Insert name> \n");
@@ -176,6 +183,9 @@ void Interractive(int id)
             break;
         case 6:
             printf("\n[id] name:\n\n");
+            break;
+        case 7:
+            printf("!!!No such [id] exists!!!\n");
             break;
     }
 }
